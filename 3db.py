@@ -3,6 +3,10 @@ import math
 # all in uF
 CAP_VALUES = [220, 4.7, 2.2, 1, 0.02, 0.001, 0.0001, 0.00001]
 
+# limits to prevent printing ridiculous component values
+UF_LIMIT_LOW = 0.001
+UF_LIMIT_HIGH = 300
+
 PF_LIMIT_LOW = 10
 PF_LIMIT_HIGH = 200
 
@@ -20,12 +24,18 @@ def print_component_table(*, freq):
 
     for c in CAP_VALUES:
         r = calculate_r(c, freq)
-
         c_in_pF = uF_to_pF(c)
+
+        # apply limits
         if c_in_pF > PF_LIMIT_HIGH or c_in_pF < PF_LIMIT_LOW:
             c_in_pF = "-"
         else:
             c_in_pF = round(c_in_pF, 4)
+
+        if c > UF_LIMIT_HIGH or c < UF_LIMIT_LOW:
+            c = "-"
+
+        # TODO: choose an R thats reasonable from a component list that gets us around 10% tolerance
         print(template.format(c, c_in_pF, round(r / 1000, 4), round(r, 0)))
 
 
