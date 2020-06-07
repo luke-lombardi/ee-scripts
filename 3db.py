@@ -1,14 +1,36 @@
 import math
 
 # all in uF
-CAP_VALUES = [220, 4.7, 2.2, 1, 0.02, 0.001, 0.0001, 0.00001]
+CAP_VALUES = [
+    1000,
+    680,
+    470,
+    330,
+    220,
+    100,
+    47,
+    33,
+    22,
+    10,
+    4.7,
+    3.3,
+    2.2,
+    1,
+    0.1,
+    0.22,
+    0.47,
+    0.02,
+    0.001,
+    0.0001,
+    0.00001,
+]
 
 # limits to prevent printing ridiculous component values
 UF_LIMIT_LOW = 0.001
 UF_LIMIT_HIGH = 300
 
 PF_LIMIT_LOW = 10
-PF_LIMIT_HIGH = 200
+PF_LIMIT_HIGH = 1000
 
 calculate_r = lambda c, f: 1 / (2 * math.pi * (c * 10 ** -6) * f)
 uF_to_pF = lambda c: c * (10 ** 6)
